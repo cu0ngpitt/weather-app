@@ -1,0 +1,12 @@
+<p>{{city}} {{country}}</p>
+<p>{{today | date: 'MMMM d, y'}}</p>
+<p>{{today | date: 'h:mm: a'}}</p>
+
+<p>{{weatherDescription}}</p>
+<p>
+  <img src="{{icon}}" alt="icon image">
+  {{temp}} °C
+</p>
+
+<p>Humidity: {{humidity}}</p>
+<p>Wind: {{deg}} {{wind | number: '1.2-2'}} km/h</p>
