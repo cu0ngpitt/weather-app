@@ -10,15 +10,7 @@ import { WeatherService } from '../../services/weather.service';
 })
 export class MainWeatherComponent implements OnInit {
 
-  city: string;
-  country: string;
   today: number = Date.now();
-  temp: number;
-  weatherDescription: string;
-  icon;
-  humidity: string;
-  wind: number;
-  deg: string;
 
   constructor(public weather: WeatherService) { }
 
@@ -27,25 +19,17 @@ export class MainWeatherComponent implements OnInit {
   }
 
   getWeather() {
-    this.weather.getWeather()
-      .subscribe((data: any) => {
-        this.temp = data.main.temp;
-        this.city = data.name;
-        this.country = data.sys.country;
-        this.weatherDescription = data.weather[0].main;
-        this.wind = data.wind.speed / 1000 * 3600;                                        // meter/sec converted to km/hr
-        this.deg = this.degreesToCardinal(data.wind.deg);
-        this.icon = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';   // weather icon
-        console.log(data);
-        console.log("degrees are " + data.wind.deg);
-      });
-  }
+    this.weather.units = !this.weather.units;
 
-  degreesToCardinal(x) {
-    const degrees = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
-    let num = Math.round((x/22.5));
+    if(this.weather.units) {
+      this.weather.getWeatherMetric();
+      this.weather.getForecastMetric();
+    }
 
-    return degrees[(num % 16)];
+    if(!this.weather.units) {
+      this.weather.getWeatherImperial();
+      this.weather.getForecastImperial();
+    }
   }
 
 }
