@@ -33,7 +33,6 @@ export class MainWeatherComponent implements OnInit {
         this.city = data.name;
         this.country = data.sys.country;
         this.weatherDescription = data.weather[0].main;
-        this.humidity = data.main.humidity;
         this.wind = data.wind.speed / 1000 * 3600;                                        // meter/sec converted to km/hr
         this.deg = this.degreesToCardinal(data.wind.deg);
         this.icon = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';   // weather icon
