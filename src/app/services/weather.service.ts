@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { HighLows } from '../../assets/models/highlows';
-import { Days } from '../../assets/models/days';
-import { Highs } from '../../assets/models/highs';
-import { Lows } from '../../assets/models/lows';
 
 
 @Injectable({
@@ -27,9 +24,9 @@ export class WeatherService {
   // Daily forecast parameters
   public forecastData;      // Unmanipulated data saved from api
   public forecastHiLoData: HighLows[] = [];  // new data manipulated for 5 day Hi/Lo forecast
-  public forecastDays: Days[] = [];
-  public forecastHighs: Highs[] = [];
-  public forecastLows: Lows[] = [];
+  // public forecastDays: Days[] = [];
+  // public forecastHighs: Highs[] = [];
+  // public forecastLows: Lows[] = [];
 
   private weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?';   // URL to openweathermap.org weather api
   private forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?';   // URL to openweathermap.org forecast api
@@ -112,19 +109,19 @@ export class WeatherService {
         pushData = {'day': day, 'high': highTemp, 'low': lowTemp};
         this.forecastHiLoData.push(pushData);
 
-        this.forecastHighs.push(highTemp);
+        // this.forecastHighs.push(highTemp);
         highTemp = this.forecastData[i].main.temp;
 
-        this.forecastLows.push(lowTemp);
+        // this.forecastLows.push(lowTemp);
         lowTemp = this.forecastData[i].main.temp;
 
         day = this.forecastData[i].dt * 1000;
-        this.forecastDays.push(day);
+        // this.forecastDays.push(day);
       }
 
       if(((this.forecastData[i].dt / 21600) - 71585) % 4 != 0 && i == this.forecastData.length - 1) {
-        this.forecastHighs.push(highTemp);
-        this.forecastLows.push(lowTemp);
+        // this.forecastHighs.push(highTemp);
+        // this.forecastLows.push(lowTemp);
 
         pushData = {'day': day, 'high': highTemp, 'low': lowTemp};
         this.forecastHiLoData.push(pushData);
