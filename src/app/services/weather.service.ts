@@ -30,7 +30,6 @@ export class WeatherService {
 
   private weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?';   // URL to openweathermap.org weather api
   private forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?';   // URL to openweathermap.org forecast api
-  private apiKey = 'ddb1e0387cda484d86e451353a0828c8';
 
   constructor(private http: HttpClient) {
   }
