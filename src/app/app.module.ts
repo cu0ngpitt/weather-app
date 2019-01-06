@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 
 import { MainWeatherComponent } from './components/main-weather/main-weather.component';
 import { DailyForecastComponent } from './components/daily-forecast/daily-forecast.component';
+import { HourlyForecastComponent } from './components/hourly-forecast/hourly-forecast.component';
+import { MinutelyForecastComponent } from './components/minutely-forecast/minutely-forecast.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainWeatherComponent,
-    DailyForecastComponent
+    DailyForecastComponent,
+    HourlyForecastComponent,
+    MinutelyForecastComponent
   ],
   imports: [
     BrowserModule,
