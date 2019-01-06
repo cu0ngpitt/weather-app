@@ -11,7 +11,8 @@ export class WeatherService {
 
   public units: boolean;
 
-  private weatherUrl = 'http://localhost:3000/weather/data';   // URL to openweathermap.org weather api
+  private metricWeatherUrl = 'http://localhost:3000/weather/metric';
+  private imperialWeatherUrl = 'http://localhost:3000/weather/imperial';
 
 
   constructor(private http: HttpClient) {
