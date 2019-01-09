@@ -1,0 +1,66 @@
+<br>
+<input type="checkbox" [(ngModel)]="weather.units">Metric
+<br>
+<br>
+
+<div class="daily-container" *ngFor="let data of dailyForecast">
+  <div class="day">
+    {{data.time | date: 'EEE MMM d'}}
+  </div>
+
+  <img src="" alt="weather pic">
+
+  <div class="temp">
+    <div class="temp-header">
+      <h4>Hi/Lo</h4>
+    </div>
+
+    <div class="temp-hi-lo" *ngIf="weather.units">
+      {{data.tempMaxC | number: '1.0-1'}} °C / {{data.tempMinC | number: '1.0-1'}} °C
+    </div>
+
+    <div class="temp-hi-lo" *ngIf="!weather.units">
+      {{data.temperatureMax | number: '1.0-1'}} °F / {{data.temperatureMin | number: '1.0-1'}} °F
+    </div>
+  </div>
+
+  <div>Precipitation {{data.precipProbability | percent}} {{precipType | titlecase}}</div>
+  <div>Humidity {{data.humidity | percent}}</div>
+  <div *ngIf="weather.units">Wind: {{data.cardinal}} {{data.windKph | number: '1.0-2'}} km/h</div>
+  <div *ngIf="!weather.units">Wind: {{data.cardinal}} {{data.windSpeed | number: '1.0-2'}} mph</div>
+  <div>{{weatherSummary}}</div>
+
+  <br>
+
+</div>
+
+
+<!-- <div class="daily-container">
+  <div class="day">
+    {{time | date: 'EEE MMM d'}}
+  </div>
+
+  <img src="" alt="weather pic">
+
+  <div class="temp">
+    <div class="temp-header">
+      <h4>Hi/Lo</h4>
+    </div>
+
+    <div class="temp-hi-lo" *ngIf="weather.units">
+      {{tempHighC | number: '1.0-1'}} °C / {{tempLowC | number: '1.0-1'}} °C
+    </div>
+
+    <div class="temp-hi-lo" *ngIf="!weather.units">
+      {{tempHighF | number: '1.0-1'}} °F / {{tempLowF | number: '1.0-1'}} °F
+    </div>
+  </div>
+
+  <div>Precipitation {{precipitation | percent}} {{precipitationType | titlecase}}</div>
+  <div>Humidity {{humidity | percent}}</div>
+  <div *ngIf="weather.units">Wind: {{deg}} {{windKph | number: '1.0-2'}} km/h</div>
+  <div *ngIf="!weather.units">Wind: {{deg}} {{windMph | number: '1.0-2'}} mph</div>
+  <div>{{weatherSummary}}</div>
+</div>
+
+<br> -->
