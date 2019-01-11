@@ -10,6 +10,7 @@ import { MainWeatherComponent } from './components/main-weather/main-weather.com
 import { DailyForecastComponent } from './components/daily-forecast/daily-forecast.component';
 import { HourlyForecastComponent } from './components/hourly-forecast/hourly-forecast.component';
 import { MinutelyForecastComponent } from './components/minutely-forecast/minutely-forecast.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MinutelyForecastComponent } from './components/minutely-forecast/minute
     MainWeatherComponent,
     DailyForecastComponent,
     HourlyForecastComponent,
-    MinutelyForecastComponent
+    MinutelyForecastComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
