@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Currently } from '../models/currently';
@@ -24,7 +24,6 @@ export class WeatherService {
   public state: string;
 
   // Weather parameters
-  public currentlyForecast$: Observable<Currently>;
   public dailyForecast: any;
   public hourlyForecast: any;
   public minutelyForecast: any;
@@ -35,25 +34,27 @@ export class WeatherService {
   constructor(private http: HttpClient) {
   }
 
-  getGeo(): Observable<any> {
-    return this.http.get<any>(this.geoLocationUrl)
+  getGeo() {
+    return this.http.get(this.geoLocationUrl)
       .pipe(
-        map((data) => {
+        map((data: any) => {
+          this.city = data.city;
+          this.state = data.region_code;
+
           return data;
         })
       );
   }
 
-  getWeather(location): Observable<any> {
+  getWeather(location) {
     return this.http.post(this.weatherUrl, location, httpOptions)
       .pipe(
         map((data: any) => {
-          this.currentlyForecast$ = data.currently;
           this.dailyForecast = data.daily;
           this.hourlyForecast = data.hourly;
           this.minutelyForecast = data.minutely;
 
-          return this.currentlyForecast$;
+          return data.currently;
         })
       );
   }
