@@ -19,16 +19,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AppComponent,
     DailyForecastComponent,
     HourlyForecastComponent,
-    HourlyPerDayComponent
+    HourlyPerDayComponent,
     MainWeatherComponent,
     MinutelyForecastComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    FormsModule
-    HttpClientModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
