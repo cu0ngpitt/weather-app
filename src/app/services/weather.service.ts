@@ -23,11 +23,6 @@ export class WeatherService {
   public city: string;
   public state: string;
 
-  // Weather parameters
-  public dailyForecast: any;
-  public hourlyForecast: any;
-  public minutelyForecast: any;
-
   private weatherUrl = 'http://localhost:3000/weather/data';
   private geoLocationUrl = 'http://localhost:3000/weather/geo';
 
@@ -47,16 +42,7 @@ export class WeatherService {
   }
 
   getWeather(location) {
-    return this.http.post(this.weatherUrl, location, httpOptions)
-      .pipe(
-        map((data: any) => {
-          this.dailyForecast = data.daily;
-          this.hourlyForecast = data.hourly;
-          this.minutelyForecast = data.minutely;
-
-          return data.currently;
-        })
-      );
+    return this.http.post(this.weatherUrl, location, httpOptions);
   }
 
 }
