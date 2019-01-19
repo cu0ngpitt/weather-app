@@ -1,7 +1,8 @@
-<div *ngIf="currently">
-  <div class="location">
-    <div>{{weather.city | titlecase}}, {{weather.state | uppercase}}</div>
-  </div>
+<div class="location" *ngIf="currently">
+  <div>{{weather.city | titlecase}}, {{weather.state | uppercase}}</div>
+</div>
+
+<div *ngIf="currently && router.url==='/'">
 
   <div>{{currently.time | date: 'MMMM d, y'}}</div>
   <div>as of {{currently.time | date: 'h:mm: a'}}</div>

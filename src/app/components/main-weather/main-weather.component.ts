@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 import { WeatherService } from '../../services/weather.service';
 
 import { Currently } from '../../models/currently';
@@ -13,19 +15,18 @@ export class MainWeatherComponent implements OnInit {
 
   currently: Currently;
 
-  constructor(public weather: WeatherService) {
+  constructor(public weather: WeatherService,
+              public router: Router) {
     this.weather.units = "imperial";
   }
 
   ngOnInit() {
     this.getGeo();
-    console.log(this.weather.units)
   }
 
   getGeo() {
     this.weather.getGeo()
       .subscribe((data: any) => {
-        console.log(data)
         this.getWeather(data.latitude, data.longitude);
       });
   }
@@ -35,13 +36,15 @@ export class MainWeatherComponent implements OnInit {
 
     this.weather.getWeather(location)
       .subscribe((data: any) => {
-        this.currently = data;
-        this.currently.time = this.convertUnixTime(data.time);
-        this.currently.tempC = this.convertFtoC(data.temperature);
-        this.currently.feelsLikeC = this.convertFtoC(data.apparentTemperature);
-        this.currently.windKph = this.mphToKph(data.windSpeed);
-        this.currently.deg = this.degreesToCardinal(data.windBearing);
-        console.log(this.currently);
+        this.currently = data.currently;
+        console.log(data)
+        this.currently.time = this.convertUnixTime(data.currently.time);
+        // console.log(this.currently.time + ': after conversion')
+        this.currently.tempC = this.convertFtoC(data.currently.temperature);
+        this.currently.feelsLikeC = this.convertFtoC(data.currently.apparentTemperature);
+        this.currently.windKph = this.mphToKph(data.currently.windSpeed);
+        this.currently.deg = this.degreesToCardinal(data.currently.windBearing);
+        console.log(this.currently)
       });
   }
 
@@ -50,7 +53,7 @@ export class MainWeatherComponent implements OnInit {
   }
 
   convertFtoC(x) {
-    return (x -32) / 5 * 9;
+    return (x - 32) * 5 / 9;
   }
 
   mphToKph(x) {
