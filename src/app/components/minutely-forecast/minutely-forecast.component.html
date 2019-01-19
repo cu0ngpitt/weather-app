@@ -1,3 +1,20 @@
-<p>
-  minutely-forecast works!
-</p>
+{{summary}}
+
+<br>
+<br>
+<h3 *ngIf="minutelyForecast">{{minutelyForecast[0].time | date: 'EEE MMM d, y'}}</h3>
+<br>
+
+<table>
+  <tr>
+    <th>Time</th>
+    <th>Precipitation</th>
+    <th>Condition</th>
+  </tr>
+
+  <tr *ngFor="let data of minutelyForecast">
+    <td>{{data.time | date: 'EEE h:mm a'}}</td>
+    <td>{{data.precipProbability | percent}}</td>
+    <td>{{data.precipType | titlecase}}</td>
+  </tr>
+</table>
