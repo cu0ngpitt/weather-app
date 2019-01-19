@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { WeatherService } from '../../services/weather.service';
 
+import { Daily } from '../../models/daily';
 
 @Component({
   selector: 'app-daily-forecast',
@@ -10,53 +11,34 @@ import { WeatherService } from '../../services/weather.service';
 })
 export class DailyForecastComponent implements OnInit {
 
-  public dailyForecast: any;
-  // @Input() datas;
-
-  // Daily weather parameters
-  // public time: number;
-  // public tempHighF: number;
-  // public tempHighC: number;
-  // public tempLowF: number;
-  // public tempLowC: number;
-  // public weatherSummary: string;
-  // public icon: string;
-  // public humidity: number;
-  // public precipitation: number;
-  // public precipitationType: string;
-  // public windMph: number;
-  // public windKph: number;
-  // public deg: string;
+  summary: string;
+  dailyForecast: Daily[];
 
   constructor(public weather: WeatherService) { }
 
   ngOnInit() {
-    this.getDailyForecast();
+    this.getGeo();
   }
 
-  getDailyForecast() {
-    this.weather.getWeather()
+  getGeo() {
+    this.weather.getGeo()
       .subscribe((data: any) => {
+        this.getWeather(data.latitude, data.longitude);
+      });
+  }
+
+  getWeather(lat, long) {
+    let location = { latitude: lat, longitude: long };
+
+    this.weather.getWeather(location)
+      .subscribe((data: any) => {
+        this.summary = data.daily.summary;
         this.dailyForecast = data.daily.data;
         this.convertUnixTime();
         this.convertFtoC();
         this.mphToKph();
         this.degreesToCardinal();
-        console.log(this.dailyForecast);
       });
-      // This section will be used if not using router outlet
-      // this.time = this.convertUnixTime(this.datas.time);
-      // this.tempHighF = this.datas.temperatureMax;
-      // this.tempLowF = this.datas.temperatureMin;
-      // this.tempHighC = this.convertFtoC(this.datas.temperatureMax);
-      // this.tempLowC = this.convertFtoC(this.datas.temperatureMin);
-      // this.weatherSummary = this.datas.summary;
-      // this.windMph = this.datas.windSpeed;
-      // this.windKph = this.mphToKph(this.datas.windSpeed);
-      // this.deg = this.degreesToCardinal(this.datas.windBearing);
-      // this.precipitation = this.datas.precipProbability;
-      // this.precipitationType = this.datas.precipType;
-      // this.humidity = this.datas.humidity;
   }
 
   convertUnixTime() {
@@ -88,24 +70,5 @@ export class DailyForecastComponent implements OnInit {
       this.dailyForecast[i].cardinal = degrees[(newBearing % 16)];
     }
   }
-
-  // convertUnixTime(x) {
-  //   return x * 1000;
-  // }
-  //
-  // convertFtoC(x) {
-  //   return (x -32) / 5 * 9;
-  // }
-  //
-  // mphToKph(x) {
-  //   return x * 1.609344;
-  // }
-  //
-  // degreesToCardinal(x) {
-  //   const degrees = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
-  //   let num = Math.round((x/22.5));
-  //
-  //   return degrees[(num % 16)];
-  // }
 
 }
