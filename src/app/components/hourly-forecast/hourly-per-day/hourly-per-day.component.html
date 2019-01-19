@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <td>{{day.time | date: 'EEE h a'}}</td>
+    <td>
+      <div class="image" [ngSwitch]="day.icon">
+        <img *ngSwitchCase="'clear-day'" src="../../assets/images/clear-day.svg" alt="icon image">
+        <img *ngSwitchCase="'clear-night'" src="../../assets/images/clear-night.svg" alt="icon image">
+        <img *ngSwitchCase="'cloudy'" src="../../assets/images/cloudy.svg" alt="icon image">
+        <img *ngSwitchCase="'fog'" src="../../assets/images/fog.svg" alt="icon image">
+        <img *ngSwitchCase="'partly-cloudy-day'" src="../../assets/images/partly-cloudy-day.svg" alt="icon image">
+        <img *ngSwitchCase="'partly-cloudy-night'" src="../../assets/images/partly-cloudy-night.svg" alt="icon image">
+        <img *ngSwitchCase="'rain'" src="../../assets/images/rain.svg" alt="icon image">
+        <img *ngSwitchCase="'sleet'" src="../../assets/images/sleet.svg" alt="icon image">
+        <img *ngSwitchCase="'snow'" src="../../assets/images/snow.svg" alt="icon image">
+        <img *ngSwitchCase="'wind'" src="../../assets/images/wind.svg" alt="icon image">
+      </div>
+      {{day.summary | titlecase}}
+    </td>
+    <td [ngSwitch]="weather.units">
+      <div *ngSwitchCase="'metric'">{{day.tempC | number: '1.0-1'}} °C</div>
+      <div *ngSwitchCase="'imperial'">{{day.temperature | number: '1.0-0'}} °F</div>
+    </td>
+    <td>{{day.precipProbability | percent}}</td>
+    <td [ngSwitch]="weather.units">
+      <div *ngSwitchCase="'metric'">{{day.cardinal}} {{day.windKph | number: '1.0-0'}} km/h</div>
+      <div *ngSwitchCase="'imperial'">{{day.cardinal}} {{day.windSpeed | number: '1.0-0'}} mph</div>
+    </td>
+  </tr>
+</table>

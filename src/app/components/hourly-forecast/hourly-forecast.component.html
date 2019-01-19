@@ -1,0 +1,28 @@
+{{summary}}
+<br>
+<br>
+
+<table>
+  <tr>
+    <th>Time</th>
+    <th>Cond</th>
+    <th>Temp</th>
+    <th>Precip</th>
+    <th>Wind</th>
+  </tr>
+</table>
+
+<div>
+  <div class="day-heading">{{headerDays[0] | date: 'EEE MMMM d'}}</div>
+  <app-hourly-per-day *ngFor="let hour of day1Hourly" [day]="hour"></app-hourly-per-day>
+</div>
+
+<div>
+  <div class="day-heading">{{headerDays[1] | date: 'EEE MMMM d'}}</div>
+  <app-hourly-per-day *ngFor="let hour of day2Hourly" [day]="hour"></app-hourly-per-day>
+</div>
+
+<div>
+  <div class="day-heading">{{headerDays[2] | date: 'EEE MMMM d'}}</div>
+  <app-hourly-per-day *ngFor="let hour of day3Hourly" [day]="hour"></app-hourly-per-day>
+</div>
