@@ -13,7 +13,10 @@ const routes: Routes = [
   { path: 'daily', component: DailyForecastComponent },
   { path: 'hourly', component: HourlyForecastComponent },
   { path: 'minutely', component: MinutelyForecastComponent },
-  // { path: '', redirectTo: '/current', pathMatch: 'full'}
+  // { path: '', redirectTo: '/current', pathMatch: 'full' }
+
+  // What happens if the user goes to a route they shouldn't
+  // Maybe introduce the 404 wildcard path to send the user back to a page they should be on
 ];
 
 @NgModule({

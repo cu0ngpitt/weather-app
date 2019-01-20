@@ -23,6 +23,15 @@ export class WeatherService {
   public city: string;
   public state: string;
 
+  // Not a big thing. Maybe break the first part off and reference and then reference with interpolation;
+  // E.G
+  // private apiLocation = 'http://localhost:3000';
+  // private weatherUrl = `${apiLocation}/weather/data`;
+  // private geoLocationUrl = `${apiLocation}/weather/geo`;
+
+  // this way if the domain changes you do not need to update it in however many different locations
+  // Also look at using an environments file that way you can pass it into the different services and have the same effect
+
   private weatherUrl = 'http://localhost:3000/weather/data';
   private geoLocationUrl = 'http://localhost:3000/weather/geo';
 

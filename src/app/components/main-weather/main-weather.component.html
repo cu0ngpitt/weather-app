@@ -7,6 +7,11 @@
   <div>{{currently.time | date: 'MMMM d, y'}}</div>
   <div>as of {{currently.time | date: 'h:mm: a'}}</div>
 
+  <!--
+    This is the exact same set of code as found in daily-forcast.component.html
+    could we not move this into its own component and pass Input() values in??
+  -->
+
   <div class="image" [ngSwitch]="icon">
     <img *ngSwitchCase="'clear-day'" src="../../assets/images/clear-day.svg" alt="icon image">
     <img *ngSwitchCase="'clear-night'" src="../../assets/images/clear-night.svg" alt="icon image">
@@ -32,6 +37,8 @@
     </div>
   </div>
 
+  <!-- End comment-->
+
   <div>{{currently.summary | titlecase}}</div>
 
   <div>Precipitation: {{currently.precipProbability | percent}}</div>
@@ -39,6 +46,7 @@
   <div [ngSwitch]="weather.units">
     <div *ngSwitchCase="'metric'">Wind: {{deg}} {{currently.windKph | number: '1.0-0'}} km/h</div>
     <div *ngSwitchCase="'imperial'">Wind: {{deg}} {{currently.windSpeed | number: '1.0-0'}} mph</div>
+    <!-- Same as daily-forcast.component.html -->
   </div>
 
 </div>

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { WeatherService } from '../../services/weather.service';
 
 import { Currently } from '../../models/currently';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-weather',
@@ -33,6 +34,19 @@ export class MainWeatherComponent implements OnInit {
 
   getWeather(lat, long) {
     let location = { latitude: lat, longitude: long };
+
+    // Subscribe inside of a subscribe is very bad practise. this is because in this sense the getGeo will complete before the getWeather completes, essentially leaving that Observable lost
+    // This occuring as subscribes are asyncronous, basically they do not want to wait for anyone or anything. we can get around this however
+    //
+    // You should be utilizing RXJS and use of the pipe function to chain together functions
+    // Example
+
+    // this.weather.getGeo()
+    //   .pipe( //From here the pipeline will have whatever was returned form the getGeo call
+    //     flatMap( geoData => this.getWeather(geoData.lat, geoData.long)) // Also known as mergeMap https://www.learnrxjs.io/operators/transformation/mergemap.html
+    //     // This will only allow one Observale to run at a time, it will take the data is has (geoData) previously and return a new obserable in its place
+    //     // from this point any data from the first call (getGeo) is lost
+    //   ).subscribe(...)
 
     this.weather.getWeather(location)
       .subscribe((data: any) => {

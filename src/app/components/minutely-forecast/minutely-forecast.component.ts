@@ -24,6 +24,7 @@ export class MinutelyForecastComponent implements OnInit {
     this.weather.getGeo()
       .subscribe((data: any) => {
         this.getWeather(data.latitude, data.longitude);
+        //Reference main-weather.component.ts comment on obserables
       });
   }
 
