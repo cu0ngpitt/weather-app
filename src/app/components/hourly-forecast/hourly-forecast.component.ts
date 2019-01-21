@@ -71,7 +71,7 @@ export class HourlyForecastComponent implements OnInit {
 
     // Converts the unix time into a day of the week and pushes it into an array
     while (day < weekday.length && daysOfForecast.length < 3) {
-      dayToString = weekday[day];
+      dayToString = weekday[day]; //Why cant we push weekday[day] straight into the
       daysOfForecast.push(dayToString);
       day++;
     }
@@ -87,7 +87,7 @@ export class HourlyForecastComponent implements OnInit {
 
     // Separate the forecast array by days
     for(let i=0; i < this.hourlyForecast.length; i++) {
-      let time = this.hourlyForecast[i].time,
+      let time = this.hourlyForecast[i].time, //This will fail a prod build. Two instances of these variables in a scope.
           date = new Date(time),
           day = date.getDay(),
           dayToString = weekday[day];

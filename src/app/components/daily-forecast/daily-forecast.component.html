@@ -58,7 +58,7 @@
     Consider using a ternary operator here (exp ? true : false) here to shrink this line
 
   <div class="wind">
-    <div *ngSwitchCase="'metric'">
+    <div>
       Wind: {{data.cardinal}} {{data.windKph | number: '1.0-0'}} {{ weather.units === 'metric' ? 'kph' : 'mph' }}
     </div>
   </div>

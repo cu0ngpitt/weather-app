@@ -19,7 +19,6 @@ export class AppComponent {
 
   toggleImperial() {
     this.weather.units = "imperial";
-    
   }
 
 }
